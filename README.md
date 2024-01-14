@@ -7,8 +7,11 @@
 * Download [NodeJS](https://nodejs.org/)
 * Download this code, choose a folder in your system and type:
 ```sh
-git clone X
+git clone https://github.com/Rogermax/javascript_course.git
 ```
 * Open VSC on this project folder
-* Type `npm install`
-* Type `npm start`
+* Type:
+```
+npm install
+npm start
+```
