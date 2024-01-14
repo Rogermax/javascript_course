@@ -10,10 +10,8 @@
 </head>
 <body>
     <div id="content">
-        <div id="lessons" class="sidebar">
-            <!-- List of lessons will be populated here -->
-        </div>
-        <div id="lesson-content">
+        <div id="lessons" class="header"></div>
+        <div id="lesson-content" class="theory">
             <div id="readme" class="main">
                 <!-- README content will be displayed here -->
             </div>
@@ -21,15 +19,15 @@
                 <!-- List of exercises will be populated here -->
             </div>
         </div>
-        <div id="exercise-content">
+        <div id="exercise-content" class="exercise">
             <div id="exercise-readme" class="main">
                 <!-- Exercise README content will be displayed here -->
             </div>
-            <div id="exercise-code" class="main">
-                <div id="code-editor"></div>
-                <div id="syntax-error"></div>
-                <button id="run-code">Run Code</button>
-            </div>
+        </div>
+        <div id="exercise-code" class="code">
+            <button id="run-code">⏵︎</button>
+            <div id="code-editor"></div>
+            <div id="syntax-error" class="ace-monokai"></div>
         </div>
     </div>    
     <script type="module">

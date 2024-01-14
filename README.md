@@ -15,4 +15,4 @@ git clone https://github.com/Rogermax/javascript_course.git
 npm install
 npm start
 ```
-* visit `https://localhost:3000`
+* visit `http://localhost:3000`

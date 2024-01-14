@@ -1,30 +1,49 @@
+var workerWorking = false;
+var codeExisting = false;
+
 fetch('./_lessons.json')
     .then(response => response.json())
     .then(lessons => {
         
-        const worker = new Worker('worker.js');
 
         document.getElementById('run-code').addEventListener('click', async () => {
             const code = window.editor.getValue();
-            worker.postMessage(code);
 
             // Lint the code
             window.JSHINT(code);
             const results = window.JSHINT.data();
             console.log(results);
-            if (results.errors.length === 0) {
-                worker.postMessage(code);
+            if (workerWorking) {
+                document.getElementById('syntax-error').innerHTML = "<span class=\"warning\">Already executing last code... </span>";
             } else {
-                document.getElementById('syntax-error').innerHTML = results.errors.map((error) => `<li>Line ${error.line} (column: ${error.character}): ${error.reason} ${error.code && error.code.startsWith('W') ? "(warning)" : "(error)"}</li>`).join('');                            
+                if (!results.errors || results.errors.length === 0) {
+                    const worker = new Worker('worker.js');
+                    document.getElementById('syntax-error').innerHTML = "";
+
+                    worker.onmessage = function(event) {
+                        const result = event.data;
+                        if (result.hasOwnProperty('result')) {
+                            console.log('worker return: ', result);
+                        } else {
+                            const key = Object.keys(result)[0];
+                            document.getElementById('syntax-error').innerHTML += `<span class=\"${key}\">${result[key]}</span>`;
+                        }
+                        workerWorking = false;
+                    };
+
+                    workerWorking = true;
+                    worker.postMessage(code);
+                    // Set a timeout to terminate the worker if it runs too long
+                    const timeoutId = setTimeout(() => {
+                        workerWorking = false;
+                    }, 5000); // Timeout after 5000 milliseconds (5 seconds)
+                } else {
+                    document.getElementById('syntax-error').innerHTML = results.errors.map((error) => `<span class=\"${error.code && error.code.startsWith('W') ? "warning" : "error"}\">Line ${error.line} (column: ${error.character}): ${error.reason}</span>`).join('');
+                }
             }
 
         });
-        
-        worker.onmessage = function(event) {
-            const result = event.data;
-            console.log(result);
-        };
-
+    
         // Populate the lessons on page load
         populateLessons(lessons);
     })
@@ -34,7 +53,7 @@ fetch('./_lessons.json')
 function populateLessons(lessons) {
     const lessonsDiv = document.getElementById('lessons');
     lessons.forEach((lesson) => {
-        const lessonElement = document.createElement('div');
+        const lessonElement = document.createElement('button');
         lessonElement.textContent = lesson.title;
         lessonElement.addEventListener('click', () => selectLesson(lesson));
         lessonsDiv.appendChild(lessonElement);
@@ -52,7 +71,7 @@ function populateExercises(exercises) {
     const exercisesDiv = document.getElementById('exercises');
     exercisesDiv.innerHTML = ''; // Clear any existing exercises
     exercises.forEach((exercise) => {
-        const exerciseElement = document.createElement('div');
+        const exerciseElement = document.createElement('button');
         exerciseElement.textContent = exercise.title;
         exerciseElement.addEventListener('click', () => selectExercise(exercise));
         exercisesDiv.appendChild(exerciseElement);
