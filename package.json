@@ -1,0 +1,35 @@
+{
+  "name": "javascript_course",
+  "version": "1.0.0",
+  "description": "A simple javascript course to introduce new people on programming",
+  "main": "index.js",
+  "scripts": {
+    "prestart": "node build.js",
+    "start": "lite-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rogermax/javascript_course.git"
+  },
+  "keywords": [
+    "javascript",
+    "course",
+    "Rogermax"
+  ],
+  "author": "Roger De Moreta",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Rogermax/javascript_course/issues"
+  },
+  "homepage": "https://github.com/Rogermax/javascript_course#readme",
+  "devDependencies": {
+    "fs": "^0.0.1-security",
+    "glob": "^7.1.7",
+    "lite-server": "2.6.1"
+  },
+  "dependencies": {
+    "@editorjs/editorjs": "^2.28.2",
+    "eslint": "^8.56.0"
+  }
+}
