@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Learn Programming</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/theme-monokai.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jshint/2.12.0/jshint.js"></script>
+</head>
+<body>
+    <div id="content">
+        <div id="lessons" class="sidebar">
+            <!-- List of lessons will be populated here -->
+        </div>
+        <div id="lesson-content">
+            <div id="readme" class="main">
+                <!-- README content will be displayed here -->
+            </div>
+            <div id="exercises" class="sidebar">
+                <!-- List of exercises will be populated here -->
+            </div>
+        </div>
+        <div id="exercise-content">
+            <div id="exercise-readme" class="main">
+                <!-- Exercise README content will be displayed here -->
+            </div>
+            <div id="exercise-code" class="main">
+                <div id="code-editor"></div>
+                <div id="syntax-error"></div>
+                <button id="run-code">Run Code</button>
+            </div>
+        </div>
+    </div>    
+    <script type="module">
+        // JSHINT is globally available
+        window.JSHINT = JSHINT;
+
+        window.editor = ace.edit("code-editor");
+        window.editor.setTheme("ace/theme/monokai");
+        window.editor.session.setMode("ace/mode/javascript"); 
+        
+    </script>
+    <script src="worker.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>
