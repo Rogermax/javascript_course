@@ -51,7 +51,7 @@ html, body {
     span.error {
         color: tomato;
     }
-    span.warning {
+    span.warning, span.warn {
         color: orange
     }
     span.info {

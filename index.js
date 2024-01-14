@@ -10,7 +10,7 @@ fetch('./_lessons.json')
             const code = window.editor.getValue();
 
             // Lint the code
-            window.JSHINT(code);
+            window.JSHINT(code, {esversion: 11});
             const results = window.JSHINT.data();
             console.log(results);
             if (workerWorking) {

@@ -22,4 +22,4 @@ Learning to program has many benefits. It helps you:
 JavaScript is a popular programming language for web development. It's a great language for beginners because of its simplicity and wide usage.
 
 ## Exercises
-Check the `exercises` folder for this lesson's exercises. Follow the steps and read the comments.
+Check each one of this buttons to learn while coding. Follow the steps, read the comments and execute your code.
